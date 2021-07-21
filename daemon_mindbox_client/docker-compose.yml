@@ -1,0 +1,28 @@
+version: "3.4"
+
+services:
+  mindbox-client:
+    build:
+      context: ""
+    image: mindbox-client:radis
+    restart: "no"
+    environment:
+      HTTP_PORT: 80
+      NSQ_HOST: 127.0.0.1
+      NSQ_PORT: 4150
+      NSQ_TOPIC_MINDBOX_CLIENT: mindbox_client
+      NSQ_CHANNEL: channel
+      MINDBOX_END_POINT_ID: fashionhouse-retailcrm
+      MINDBOX_OPERATION_UPDATE_CLIENT: Retail.EditCustomer
+      MINDBOX_OPERATION_CREATE_CLIENT: Retail.CreateCustomer
+      MINDBOX_SECRET_KEY: CZkn1RvfOnV4HR1dh4Wy
+    volumes:
+      - .:/srv
+    ports:
+      - 8384:80
+    networks:
+      - mindbox
+
+networks:
+  mindbox:
+    external: true
